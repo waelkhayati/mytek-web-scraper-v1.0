@@ -10,6 +10,6 @@ module.exports = function(app) {
         next();
     });
 
-    app.get("/telephonie", [authJwt.verifyToken, authJwt.isModeratorOrAdmin], controller.Categories);
+    app.get("/telephonie", authJwt.verifyToken, controller.Categories);
 
 };
