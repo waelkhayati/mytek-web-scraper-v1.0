@@ -10,15 +10,16 @@ module.exports = function(app) {
         next();
     });
 
+    app.post("/telephonie/mobile/:limit", [authJwt.verifyToken, authJwt.isModeratorOrAdmin], controller.Scrape);
 
-app.post("/mytek/telephonie/mobile/:limit", [authJwt.verifyToken, authJwt.isModeratorOrAdmin], controller.Scrape);
+    app.post("/telephonie/mobile/:limit/:keyword", [authJwt.verifyToken, authJwt.isModeratorOrAdmin], controller.ScrapeFilter);
 
-app.post("/mytek/telephonie/mobile/:limit/:keyword", [authJwt.verifyToken, authJwt.isModeratorOrAdmin], controller.ScrapeFilter);
+    app.delete("/telephonie/mobile", [authJwt.verifyToken, authJwt.isAdmin], controller.RemoveAll);
 
-app.delete("/mytek/telephonie/mobile", [authJwt.verifyToken, authJwt.isAdmin], controller.RemoveAll);
+    app.delete("/telephonie/mobile/:title", [authJwt.verifyToken, authJwt.isAdmin], controller.RemoveByTitle);
 
-app.delete("/mytek/telephonie/mobile/:title", [authJwt.verifyToken, authJwt.isAdmin], controller.RemoveByTitle);
+    app.get("/telephonie/mobile", authJwt.verifyToken, controller.DisplayAll);
 
-app.get("/mytek/telephonie/mobile", authJwt.verifyToken, controller.DisplayAll);
+    app.get("/telephonie/mobile/:title", authJwt.verifyToken, controller.DisplayByTitle);
 
 };

@@ -84,20 +84,33 @@ exports.RemoveAll = (req, res) =>{
         where: {},
         truncate: true
     })
-    res.status(200).send('deleted')
+    res.status(200).send('article effacé avec succés!')
 }
 
 exports.RemoveByTitle = (req, res) =>{
     Mobile.destroy({
         where: {
-            titre:req.params.title
+            titre:{
+                [Op.substring]: req.params.title
+            }
         },
     })
-    res.status(200).send('deleted')
+    res.status(200).send('article effacé avec succés!')
 }
-
-//[Op.like]:
 
 exports.DisplayAll = async (req, res) =>{
     res.status(200).send(await Mobile.findAll())
+}
+
+exports.DisplayByTitle = async (req, res) =>{
+
+    res.status(200).send(
+        await Mobile.findAll({
+            where: {
+                titre:{
+                    [Op.substring]: req.params.title
+                }
+            },
+        })
+    )
 }

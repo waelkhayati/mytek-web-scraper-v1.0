@@ -31,12 +31,12 @@ db.sequelize.sync();
 
 // simple route
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to bezkoder application." });
+  res.json({ message: "Bienvenue à MyTek Web Scraper API." });
 });
 
 // routes
 require('./app/routes/auth.routes')(app);
-require('./app/routes/user.routes')(app);
+require('./app/routes/telephonie.routes')(app);
 require('./app/routes/mobile.routes')(app);
 
 // set port, listen for requests

@@ -8,14 +8,14 @@ verifyToken = (req, res, next) => {
 
   if (!token) {
     return res.status(403).send({
-      message: "No token provided!"
+      message: 'Un "Token" est exigé!'
     });
   }
 
   jwt.verify(token, config.secret, (err, decoded) => {
     if (err) {
       return res.status(401).send({
-        message: "Unauthorized!"
+        message: "Non autorisé!"
       });
     }
     req.userId = decoded.id;
@@ -34,7 +34,7 @@ isAdmin = (req, res, next) => {
       }
 
       res.status(403).send({
-        message: "Require Admin Role!"
+        message: "vous devez avoir les droits d'Admin pour continuer!"
       });
       return;
     });
@@ -52,7 +52,7 @@ isModerator = (req, res, next) => {
       }
 
       res.status(403).send({
-        message: "Require Moderator Role!"
+        message: "vous devez avoir les droits de Moderateur pour continuer!"
       });
     });
   });
@@ -74,7 +74,7 @@ isModeratorOrAdmin = (req, res, next) => {
       }
 
       res.status(403).send({
-        message: "Require Moderator or Admin Role!"
+        message: "vous devez avoir les droits d'Admin ou de Moderateur pour continuer!"
       });
     });
   });
